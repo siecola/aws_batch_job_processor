@@ -19,7 +19,8 @@ import java.io.InputStreamReader;
 @Service
 public class S3ObjectDownloader {
 
-    private static final Logger log = LoggerFactory.getLogger(S3ObjectDownloader.class);
+    private static final Logger log = LoggerFactory
+            .getLogger(S3ObjectDownloader.class);
 
     @Value("${amazon.aws.s3.bucket.name}")
     private String awsBucketName;
@@ -32,7 +33,8 @@ public class S3ObjectDownloader {
 
     public String getObject(String key) throws S3ObjectDownloadException {
         try {
-            S3Object object = amazonS3.getObject(new GetObjectRequest(awsBucketName, key));
+            S3Object object = amazonS3.getObject(
+                    new GetObjectRequest(awsBucketName, key));
             return readStream(object.getObjectContent());
         } catch (AmazonServiceException e) {
             log.error("Failed to download content");
@@ -48,7 +50,8 @@ public class S3ObjectDownloader {
 
     private String readStream(InputStream inputStream) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
-        BufferedReader reader = new BufferedReader((new InputStreamReader(inputStream)));
+        BufferedReader reader = new BufferedReader((
+                new InputStreamReader(inputStream)));
         String line;
 
         while((line = reader.readLine()) != null) {

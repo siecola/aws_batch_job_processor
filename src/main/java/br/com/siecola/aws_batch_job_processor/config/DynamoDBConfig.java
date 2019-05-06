@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableDynamoDBRepositories(dynamoDBMapperConfigRef = "dynamoDBMapperConfig", basePackages = {"br.com.siecola.aws_batch_job_processor.repository"})
+@EnableDynamoDBRepositories(dynamoDBMapperConfigRef = "dynamoDBMapperConfig",
+        basePackages = {"br.com.siecola.aws_batch_job_processor.repository"})
 public class DynamoDBConfig {
 
     @Value("${amazon.aws.region}")

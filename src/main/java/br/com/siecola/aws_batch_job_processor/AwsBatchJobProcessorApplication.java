@@ -11,9 +11,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration;
 import org.springframework.core.env.Environment;
 
-@SpringBootApplication(scanBasePackages = {"br.com.siecola.aws_batch_job_processor.repository"}, exclude = RepositoryRestMvcAutoConfiguration.class)
+@SpringBootApplication(
+		scanBasePackages = {"br.com.siecola.aws_batch_job_processor.repository"},
+		exclude = RepositoryRestMvcAutoConfiguration.class)
 public class AwsBatchJobProcessorApplication implements CommandLineRunner {
-	private static final Logger log = LoggerFactory.getLogger(AwsBatchJobProcessorApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(
+			AwsBatchJobProcessorApplication.class);
 
 	@Autowired
 	private Environment environment;
@@ -30,10 +33,10 @@ public class AwsBatchJobProcessorApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		String transactionKey = environment.getProperty("transactionKey");
-		log.info("Transaction key: " + transactionKey);
-		String objectContent = s3ObjectDownloader.getObject(transactionKey);
+		String objectKey = environment.getProperty("transactionKey");
+		log.info("Object key: " + objectKey);
+		String objectContent = s3ObjectDownloader.getObject(objectKey);
 
-		jobExecutor.executeJob(transactionKey, objectContent);
+		jobExecutor.executeJob(objectKey, objectContent);
 	}
 }
