@@ -54,6 +54,8 @@ public class JobExecutor {
                 }
                 job.setNumberOfRegisters(invoices.size());
                 job.setStatus(JobStatus.FINISHED);
+
+                log.info("Job processed");
             } catch (IOException e) {
                 log.error("Failed to deserialize object content");
                 job.setStatus(JobStatus.ERROR);
