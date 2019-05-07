@@ -31,7 +31,6 @@ public class AwsBatchJobProcessorApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		String objectKey = environment.getProperty("transactionKey");
-		objectKey = "1bc97c6c-31fb-4d43-b1f6-7f172a9fae79";
 		log.info("Object key: " + objectKey);
 		String objectContent = s3ObjectDownloader.getObject(objectKey);
 
