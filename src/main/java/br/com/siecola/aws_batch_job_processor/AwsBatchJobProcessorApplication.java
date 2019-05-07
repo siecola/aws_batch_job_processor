@@ -35,5 +35,7 @@ public class AwsBatchJobProcessorApplication implements CommandLineRunner {
 		String objectContent = s3ObjectDownloader.getObject(objectKey);
 
 		jobExecutor.executeJob(objectKey, objectContent);
+		log.info("Finishing the process");
+		System.exit(0);
 	}
 }
